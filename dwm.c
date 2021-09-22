@@ -219,6 +219,7 @@ static void tagmon(const Arg *arg);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglefullscr(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -1508,15 +1509,21 @@ sendmon(Client *c, Monitor *m)
 {
 	if (c->mon == m)
 		return;
+	int hadfocus = (c == selmon->sel);
 	unfocus(c, 1);
 	detach(c);
 	detachstack(c);
+	arrange(c->mon);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
 	attach(c);
 	attachstack(c);
-	focus(NULL);
-	arrange(NULL);
+	arrange(m);
+	if (hadfocus) {
+		focus(c);
+		restack(m);
+	} else
+		focus(NULL);
 }
 
 void
@@ -1855,6 +1862,13 @@ togglescratch(const Arg *arg)
 		selmon->tagset[selmon->seltags] |= scratchtag;
 		spawn(&sparg);
 	}
+}
+
+void
+togglefullscr(const Arg *arg)
+{
+  if(selmon->sel)
+    setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
 }
 
 void

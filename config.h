@@ -25,13 +25,13 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"urxvt", "--title", "spterm", "-e", "tmux", "-g", "105x26", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
+const char *spcmd1[] = {"urxvt", "--title", "spterm", "-g", "105x26", "-e", "tmux", NULL };
+const char *spcmd2[] = {"urxvt", "--title", "spmath", "-g", "50x13", "-e", "qalc", NULL };
 const char *spcmd3[] = {"gnome-pomodoro", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
+	{"spmath",      spcmd2},
 	{"gnomepomo",   spcmd3},
 };
 
@@ -46,8 +46,8 @@ static const Rule rules[] = {
 	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
 	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
 	{ NULL,		  NULL,		    "spterm",	SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "keepassxc",	NULL,		SPTAG(2),		0,			 -1 },
+	{ NULL,		  NULL,         "spmath",	SPTAG(1),		1,			 -1 },
+	{ NULL,		  NULL,         "gnomepomo",SPTAG(2),		1,			 -1 },
 	{ NULL,	      NULL,			"cava-f",	0,				1,			 -1 },
 };
 
@@ -103,6 +103,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_h,      focusmon,       {.i = -1 } },
