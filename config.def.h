@@ -26,7 +26,7 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"urxvt", "--title", "spterm", "-g", "105x26", "-e", "tmux", NULL };
-const char *spcmd2[] = {"urxvt", "--title", "spmath", "-g", "50x13", "-e", "qalc", NULL };
+const char *spcmd2[] = {"urxvt", "--title", "spmath", "-g", "70x16", "-e", "qalc", NULL };
 const char *spcmd3[] = {"gnome-pomodoro", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
@@ -98,12 +98,12 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_h,      focusmon,       {.i = -1 } },
